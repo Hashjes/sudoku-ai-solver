@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Error al procesar{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>Error al procesar el Sudoku</h2>
+    <p>{{ error }}</p>
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Intentar de nuevo</a>
+  </div>
+{% endblock %}

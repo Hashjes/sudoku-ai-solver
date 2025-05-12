@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Corrige el Sudoku{% endblock %}
+{% block content %}
+
+  {% if not original_url %}
+    <!-- FASE INICIAL: Subida -->
+    <div class="card">
+      <h2>Subir imagen de Sudoku</h2>
+      <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <div class="file-input-wrapper">
+            <label class="file-input-label">Seleccionar imagen…</label>
+            <input type="file" name="sudoku_image" accept="image/*" required>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Reconocer & Resolver</button>
+      </form>
+    </div>
+
+  {% else %}
+    <!-- FASE EDICIÓN -->
+    <div class="card">
+      <h2>Corrige la cuadrícula</h2>
+      <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+        <div style="flex:1; min-width:240px;">
+          <h3>Imagen Original</h3>
+          <img class="original" src="{{ original_url }}" alt="Sudoku">
+        </div>
+        <div style="flex:2; min-width:320px; text-align:center;">
+          <form method="post" action="{{ url_for('solve') }}">
+            <input type="hidden" name="original_url" value="{{ original_url }}">
+            {% for i in range(9) %}
+              {% for j in range(9) %}
+                <input type="hidden" name="rec_{{ i }}_{{ j }}" value="{{ recognized_board[i][j] }}">
+              {% endfor %}
+            {% endfor %}
+            {% for url in roi_urls %}
+              <input type="hidden" name="roi_urls" value="{{ url }}">
+            {% endfor %}
+
+            <div class="grid-9">
+              {% for i in range(9) %}
+                {% for j in range(9) %}
+                  <input type="number" min="1" max="9"
+                         name="cell_{{ i }}_{{ j }}"
+                         value="{{ recognized_board[i][j] if recognized_board[i][j] != 0 else '' }}">
+                {% endfor %}
+              {% endfor %}
+            </div>
+            <button class="btn btn-success mt-3">Continuar</button>
+          </form>
+        </div>
+      </div>
+
+      {% if roi_urls %}
+        <h3>ROIs extraídos</h3>
+        <div class="roi-grid">
+          {% for url in roi_urls %}
+            <img src="{{ url }}" alt="ROI {{ loop.index0 }}">
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+{% endblock %}

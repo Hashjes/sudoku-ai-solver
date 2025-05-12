@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Subir Sudoku{% endblock %}
+{% block content %}
+
+  <!-- Card de subida -->
+  <div class="card">
+    <h2>Subir imagen de Sudoku</h2>
+    <form method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <div class="file-input-wrapper">
+          <label class="file-input-label">Seleccionar imagen…</label>
+          <input type="file" name="sudoku_image" accept="image/*" required>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Reconocer & Resolver</button>
+    </form>
+  </div>
+
+  <!-- Espacio entre cards -->
+  <div style="height:1.5rem;"></div>
+
+  <!-- Card de guía -->
+  <div class="card">
+    <h2>¿Cómo jugar al Sudoku?</h2>
+    <p>El Sudoku es un rompecabezas de lógica con estas reglas básicas:</p>
+    <ul>
+      <li>La cuadrícula tiene 9 filas y 9 columnas, dividida también en 9 bloques de 3×3.</li>
+      <li>Debes rellenar cada fila, cada columna y cada bloque 3×3 con los números del 1 al 9.</li>
+      <li>Ningún número puede repetirse en una misma fila, columna o bloque.</li>
+    </ul>
+    <h3>Consejos rápidos</h3>
+    <ul>
+      <li><strong>Empieza por lo fácil:</strong> busca filas, columnas o bloques con muchas celdas ya completas.</li>
+      <li><strong>Usa notas:</strong> si no estás seguro, marca pequeños candidatos dentro de la celda.</li>
+      <li><strong>Escanea patrones:</strong> a veces verás que un número sólo puede ir en un sitio de todo un bloque.</li>
+      <li><strong>No adivines:</strong> sigue la lógica; una suposición errónea puede complicarte más.</li>
+    </ul>
+    <p>Cuando tengas tu sudoku listo en papel o en pantalla, súbelo arriba y deja que nuestra IA haga el resto. ¡A jugar!</p>
+  </div>
+
+{% endblock %}

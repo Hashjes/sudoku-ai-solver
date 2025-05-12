@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Solución Sudoku{% endblock %}
+{% block content %}
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h2>Resultado</h2>
+      <a class="btn btn-secondary" href="{{ url_for('index') }}">← Nueva imagen</a>
+    </div>
+
+    <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:1rem;">
+      <div style="flex:1; min-width:200px;">
+        <h3>Original</h3>
+        <img class="original" src="{{ original_url }}" alt="Original">
+      </div>
+      <div style="flex:1; min-width:200px;">
+        <h3>Reconocido</h3>
+        <div class="table-container">
+          <table class="board-table">
+            {% for row in recognized_board %}
+              <tr>
+              {% for n in row %}
+                <td>{% if n %}{{ n }}{% endif %}</td>
+              {% endfor %}
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <div style="flex:1; min-width:200px;">
+        <h3>Solución</h3>
+        <div class="table-container">
+          {% if solved_board %}
+            <table class="board-table">
+              {% for row in solved_board %}
+                <tr>
+                {% for n in row %}
+                  <td>{{ n }}</td>
+                {% endfor %}
+                </tr>
+              {% endfor %}
+            </table>
+          {% else %}
+            <p>No se pudo resolver.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% if steps %}
+      <details style="margin-top:1.5rem;">
+        <summary style="cursor:pointer; font-weight:600; font-size:1.1em;">
+          Mostrar/u ocultar pasos de resolución
+        </summary>
+        <div class="accordion mt-3" id="stepsAccordion">
+          {% for step in steps %}
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ loop.index }}">
+              <button class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse{{ loop.index }}"
+                      aria-expanded="false"
+                      aria-controls="collapse{{ loop.index }}">
+                Paso {{ loop.index }}
+              </button>
+            </h2>
+            <div id="collapse{{ loop.index }}"
+                 class="accordion-collapse collapse"
+                 aria-labelledby="heading{{ loop.index }}"
+                 data-bs-parent="#stepsAccordion">
+              <div class="accordion-body">
+                <div class="table-container">
+                  <table class="board-table">
+                    {% for row in step %}
+                    <tr>
+                      {% for n in row %}
+                        <td>{% if n %}{{ n }}{% endif %}</td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </details>
+    {% endif %}
+
+    {% if roi_urls %}
+      <details style="margin-top:1.5rem;">
+        <summary style="cursor:pointer; font-weight:600;">
+          Mostrar/Ocultar ROIs extraídos (9×9)
+        </summary>
+        <div class="roi-grid" style="margin-top:1rem;">
+          {% for url in roi_urls %}
+            <img src="{{ url }}" alt="ROI {{ loop.index0 }}">
+          {% endfor %}
+        </div>
+      </details>
+    {% endif %}
+  </div>
+{% endblock %}

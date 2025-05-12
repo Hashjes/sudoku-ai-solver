@@ -1,0 +1,184 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #4f46e5;
+  --secondary: #6b7280;
+  --bg: #f9fafb;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --radius: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--secondary);
+}
+
+.navbar {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--border);
+  color: var(--secondary);
+}
+
+.btn-success {
+  background: #10b981;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* —— Input file moderno —— */
+.file-input-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.file-input-wrapper input[type=file] {
+  font-size: 1rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* —— Edición Sudoku —— */
+.grid-9 {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+  max-width: 450px; /* aumentado de 360px */
+  margin: auto;
+}
+
+.grid-9 input {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* —— Quitar flechas de <input type=number> —— */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* —— ROIs —— */
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(9,1fr);
+  gap:4px;
+  margin-top: 1rem;
+}
+
+.roi-grid img, .original {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  object-fit: contain;
+}
+
+/* —— Tablas de resultado —— */
+.table-container {
+  overflow-x: auto;
+}
+
+.board-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.board-table td {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+}
+/* Margen inferior en cada card para que no se peguen */
+.card {
+    margin-bottom: 1.5rem;
+  }
+  
